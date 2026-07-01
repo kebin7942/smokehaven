@@ -21,7 +21,17 @@ export default function KakaoMap() {
   const [mapLoaded, setMapLoaded] = useState(false)
 
   useEffect(() => {
-    window.kakao.maps.load(initMap)
+    if (window.kakao && window.kakao.maps) {
+      initMap()
+    } else {
+      const wait = setInterval(() => {
+        if (window.kakao && window.kakao.maps) {
+          clearInterval(wait)
+          initMap()
+        }
+      }, 100)
+      return () => clearInterval(wait)
+    }
   }, [])
 
   function initMap() {
