@@ -21,11 +21,7 @@ export default function KakaoMap() {
   const [mapLoaded, setMapLoaded] = useState(false)
 
   useEffect(() => {
-    const appKey = import.meta.env.VITE_KAKAO_APP_KEY
-    if (!appKey) {
-      console.error('VITE_KAKAO_APP_KEY 환경변수가 없습니다.')
-      return
-    }
+    const appKey = import.meta.env.VITE_KAKAO_APP_KEY ?? '229e8e8e6fa33418d9d7caa46126e35c'
 
     if (window.kakao && window.kakao.maps) {
       initMap()
